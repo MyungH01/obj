@@ -8,6 +8,7 @@ spec:
     matchLabels:
       app: mydb
       app.kubernetes.io/name: mydb
+      tier: mydb
   serviceName: mydb
   replicas: 3
   template:
@@ -15,7 +16,28 @@ spec:
       labels:
         app: mydb
         app.kubernetes.io/name: mydb
+        tier: mydb
     spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: tier
+                operator: In
+                values:
+                - mydb
+            topologyKey: kubernetes.io/hostname
+
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: storage
+                operator: In
+                values:
+                - 'db'
+
       initContainers:
       - name: init-mysql
         image: mysql:5.7
