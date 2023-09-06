@@ -88,6 +88,12 @@ spec:
         ports:
         - name: mysql
           containerPort: 3306
+        resources:
+          requests:
+            cpu: 100m
+          limits:
+            cpu: 200m
+
         volumeMounts:
         - name: data
           mountPath: /var/lib/mysql
@@ -111,6 +117,11 @@ spec:
         ports:
         - name: xtrabackup
           containerPort: 3307
+        resources:
+          requests:
+            cpu: 100m
+          limits:
+            cpu: 200m
         command:
         - bash
         - "-c"
