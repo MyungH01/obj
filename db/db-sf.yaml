@@ -10,7 +10,7 @@ spec:
       app.kubernetes.io/name: mydb
       tier: mydb
   serviceName: mydb
-  replicas: 3
+  replicas: 2
   template:
     metadata:
       labels:
