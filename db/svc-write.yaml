@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  namespace: default
+  namespace: db
   name: mydb
   labels:
     app: mydb
