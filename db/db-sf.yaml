@@ -19,6 +19,17 @@ spec:
        
     spec:
       affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: statefulset.kubernetes.io/pod-name
+                operator: In
+                values:
+                - mydb-0
+            topologyKey: kubernetes.io/hostname
+
+
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
